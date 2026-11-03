@@ -1,0 +1,15 @@
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Binaries / build output
+*.exe
+bin/
+tmp/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store

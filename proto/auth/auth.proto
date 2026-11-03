@@ -1,0 +1,50 @@
+
+syntax = "proto3";
+
+package payment.v1;
+
+option go_package = "github.com/YOUR-GITHUB-USERNAME/go-payments-backend/gen/payment";
+
+service PaymentService {
+    rpc CalculateFee(CalculateFeeRequest) returns (CalculateFeeResponse);
+
+    rpc CreateDeposit(CreateDepositRequest) returns (CreateDepositResponse);
+
+    rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse);
+}
+
+message CalculateFeeRequest {
+    double amount = 1;
+    string currency = 2;
+}
+
+message CalculateFeeResponse {
+    double amount = 1;
+    double fee = 2;
+    double total_amount = 3;
+}
+
+message CreateDepositRequest {
+    string user_id = 1;
+    double amount = 2;
+    string currency = 3;
+}
+
+message CreateDepositResponse {
+    string transaction_id = 1;
+    string status = 2;
+    double amount = 3;
+    double fee = 4;
+}
+
+message GetTransactionRequest {
+    string transaction_id = 1;
+}
+
+message GetTransactionResponse {
+    string transaction_id = 1;
+    string status = 2;
+    double amount = 3;
+    double fee = 4;
+    string currency = 5;
+}
