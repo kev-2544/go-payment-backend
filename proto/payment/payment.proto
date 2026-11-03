@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package payment.v1;
 
-option go_package = "github.com/YOUR-GITHUB-USERNAME/go-payments-backend/gen/payment";
+option go_package = "github.com/kev-2544/go-payment-backend/gen/payment";
 
 service PaymentService {
     rpc CalculateFee(CalculateFeeRequest) returns (CalculateFeeResponse);
