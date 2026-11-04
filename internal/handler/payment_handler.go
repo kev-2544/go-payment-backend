@@ -41,3 +41,28 @@ func (h *PaymentHandler) CalculateFee(
         TotalAmount: result.TotalAmount,
     }, nil
 }
+
+func (h *PaymentHandler) CreateDeposit(
+	ctx contex.Context,
+	req *pb.CreateDepositRequest,
+) (*pb.CreateDepositResponse, error) {
+
+	tx, err := h.paymentService.CreateDeposit(
+		ctx, 
+		req.UserId,
+		int64(req.Amount),
+		req.Currency,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.CreateDepositResponse{
+		Id:       result.ID,
+		UserId:   result.UserID,
+		Amount:   result.Amount,
+		Fee:      result.Fee,
+		Currency: result.Currency,
+		Status:   result.Status,
+	}, nil
+}
