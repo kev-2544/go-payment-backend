@@ -3,23 +3,28 @@ package service
 import (
     "context"
 	"errors"
-	"github.com/kev-2544/go-payment-backend/internal/model"
 
+	"github.com/google/uuid"
+	"github.com/kev-2544/go-payment-backend/internal/model"
 	"github.com/kev-2544/go-payment-backend/internal/repository"
-	"github.com/kev-2544/go-payment-backend/internal/model"
-
 )
 
+var (
+	ErrInvalidTransactionID = errors.New("transaction ID must be a valid UUID")
+	ErrTransactionNotFound  = errors.New("transaction not found")
+)
+
+// All amounts are int64 in the currency's smallest unit (e.g. cents).
 type FeeResult struct {
-    Amount      float64
-    Fee         float64
-    TotalAmount float64
+    Amount      int64
+    Fee         int64
+    TotalAmount int64
 }
 
 type PaymentService interface {
     CalculateFee(
         ctx context.Context,
-        amount float64,
+        amount int64,
         currency string,
     ) (FeeResult, error)
 
@@ -29,6 +34,11 @@ type PaymentService interface {
 		amount int64,
 		currency string,
 	)(*model.Transaction, error)
+
+    GetTransaction(
+    ctx context.Context,
+    id string,
+    ) (*model.Transaction, error)
 }
 
 type paymentService struct{
@@ -36,6 +46,11 @@ type paymentService struct{
 }
 
 
+
+// calculateFee returns a temporary 1% fee, rounded down to the smallest unit.
+func calculateFee(amount int64) int64 {
+	return amount / 100
+}
 
 func NewPaymentService(
 	repo repository.PaymentRepository,
@@ -47,17 +62,37 @@ func NewPaymentService(
 
 func (s *paymentService) CalculateFee(
     ctx context.Context,
-    amount float64,
+    amount int64,
     currency string,
 ) (FeeResult, error) {
 
-    fee := amount * 0.01
+    fee := calculateFee(amount)
 
     return FeeResult{
         Amount:      amount,
         Fee:         fee,
         TotalAmount: amount + fee,
     }, nil
+}
+
+func (s *paymentService) GetTransaction(
+    ctx context.Context,
+    id string,
+) (*model.Transaction, error) {
+
+    if _, err := uuid.Parse(id); err != nil {
+        return nil, ErrInvalidTransactionID
+    }
+
+    tx, err := s.repository.GetTransaction(ctx, id)
+    if errors.Is(err, repository.ErrNotFound) {
+        return nil, ErrTransactionNotFound
+    }
+    if err != nil {
+        return nil, err
+    }
+
+    return tx, nil
 }
 
 func (s *paymentService) CreateDeposit(
@@ -75,7 +110,7 @@ func (s *paymentService) CreateDeposit(
         return nil, errors.New("user ID is required")
     }
 
-    fee := amount / 100 // temporary 1% fee
+    fee := calculateFee(amount)
 
     tx := &model.Transaction{
         ID:       uuid.NewString(),

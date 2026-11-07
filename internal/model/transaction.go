@@ -7,4 +7,6 @@ type Transaction struct {
     Fee      int64
     Currency string
     Status   string
+    ProviderReference string
+
 }

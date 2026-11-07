@@ -21,29 +21,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SignupRequest struct {
+type CalculateFeeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SignupRequest) Reset() {
-	*x = SignupRequest{}
+func (x *CalculateFeeRequest) Reset() {
+	*x = CalculateFeeRequest{}
 	mi := &file_proto_payment_payment_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SignupRequest) String() string {
+func (x *CalculateFeeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SignupRequest) ProtoMessage() {}
+func (*CalculateFeeRequest) ProtoMessage() {}
 
-func (x *SignupRequest) ProtoReflect() protoreflect.Message {
+func (x *CalculateFeeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_payment_payment_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,55 +54,48 @@ func (x *SignupRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SignupRequest.ProtoReflect.Descriptor instead.
-func (*SignupRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CalculateFeeRequest.ProtoReflect.Descriptor instead.
+func (*CalculateFeeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_payment_payment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SignupRequest) GetName() string {
+func (x *CalculateFeeRequest) GetAmount() string {
 	if x != nil {
-		return x.Name
+		return x.Amount
 	}
 	return ""
 }
 
-func (x *SignupRequest) GetEmail() string {
+func (x *CalculateFeeRequest) GetCurrency() string {
 	if x != nil {
-		return x.Email
+		return x.Currency
 	}
 	return ""
 }
 
-func (x *SignupRequest) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-type SignupResponse struct {
+type CalculateFeeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Fee           string                 `protobuf:"bytes,2,opt,name=fee,proto3" json:"fee,omitempty"`
+	TotalAmount   string                 `protobuf:"bytes,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SignupResponse) Reset() {
-	*x = SignupResponse{}
+func (x *CalculateFeeResponse) Reset() {
+	*x = CalculateFeeResponse{}
 	mi := &file_proto_payment_payment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SignupResponse) String() string {
+func (x *CalculateFeeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SignupResponse) ProtoMessage() {}
+func (*CalculateFeeResponse) ProtoMessage() {}
 
-func (x *SignupResponse) ProtoReflect() protoreflect.Message {
+func (x *CalculateFeeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_payment_payment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -115,54 +107,55 @@ func (x *SignupResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SignupResponse.ProtoReflect.Descriptor instead.
-func (*SignupResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CalculateFeeResponse.ProtoReflect.Descriptor instead.
+func (*CalculateFeeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_payment_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SignupResponse) GetUserId() string {
+func (x *CalculateFeeResponse) GetAmount() string {
 	if x != nil {
-		return x.UserId
+		return x.Amount
 	}
 	return ""
 }
 
-func (x *SignupResponse) GetName() string {
+func (x *CalculateFeeResponse) GetFee() string {
 	if x != nil {
-		return x.Name
+		return x.Fee
 	}
 	return ""
 }
 
-func (x *SignupResponse) GetEmail() string {
+func (x *CalculateFeeResponse) GetTotalAmount() string {
 	if x != nil {
-		return x.Email
+		return x.TotalAmount
 	}
 	return ""
 }
 
-type LoginRequest struct {
+type CreateDepositRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoginRequest) Reset() {
-	*x = LoginRequest{}
+func (x *CreateDepositRequest) Reset() {
+	*x = CreateDepositRequest{}
 	mi := &file_proto_payment_payment_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginRequest) String() string {
+func (x *CreateDepositRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginRequest) ProtoMessage() {}
+func (*CreateDepositRequest) ProtoMessage() {}
 
-func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateDepositRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_payment_payment_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -174,47 +167,56 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
-func (*LoginRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateDepositRequest.ProtoReflect.Descriptor instead.
+func (*CreateDepositRequest) Descriptor() ([]byte, []int) {
 	return file_proto_payment_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *LoginRequest) GetEmail() string {
+func (x *CreateDepositRequest) GetUserId() string {
 	if x != nil {
-		return x.Email
+		return x.UserId
 	}
 	return ""
 }
 
-func (x *LoginRequest) GetPassword() string {
+func (x *CreateDepositRequest) GetAmount() string {
 	if x != nil {
-		return x.Password
+		return x.Amount
 	}
 	return ""
 }
 
-type LoginResponse struct {
+func (x *CreateDepositRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+type CreateDepositResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AccessToken   string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Fee           string                 `protobuf:"bytes,4,opt,name=fee,proto3" json:"fee,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoginResponse) Reset() {
-	*x = LoginResponse{}
+func (x *CreateDepositResponse) Reset() {
+	*x = CreateDepositResponse{}
 	mi := &file_proto_payment_payment_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginResponse) String() string {
+func (x *CreateDepositResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginResponse) ProtoMessage() {}
+func (*CreateDepositResponse) ProtoMessage() {}
 
-func (x *LoginResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateDepositResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_payment_payment_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -226,21 +228,155 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
-func (*LoginResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateDepositResponse.ProtoReflect.Descriptor instead.
+func (*CreateDepositResponse) Descriptor() ([]byte, []int) {
 	return file_proto_payment_payment_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *LoginResponse) GetUserId() string {
+func (x *CreateDepositResponse) GetTransactionId() string {
 	if x != nil {
-		return x.UserId
+		return x.TransactionId
 	}
 	return ""
 }
 
-func (x *LoginResponse) GetAccessToken() string {
+func (x *CreateDepositResponse) GetStatus() string {
 	if x != nil {
-		return x.AccessToken
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CreateDepositResponse) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *CreateDepositResponse) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+type GetTransactionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionRequest) Reset() {
+	*x = GetTransactionRequest{}
+	mi := &file_proto_payment_payment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionRequest) ProtoMessage() {}
+
+func (x *GetTransactionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_payment_payment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionRequest.ProtoReflect.Descriptor instead.
+func (*GetTransactionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_payment_payment_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetTransactionRequest) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+type GetTransactionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Fee           string                 `protobuf:"bytes,4,opt,name=fee,proto3" json:"fee,omitempty"`
+	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionResponse) Reset() {
+	*x = GetTransactionResponse{}
+	mi := &file_proto_payment_payment_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionResponse) ProtoMessage() {}
+
+func (x *GetTransactionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_payment_payment_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionResponse.ProtoReflect.Descriptor instead.
+func (*GetTransactionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_payment_payment_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetTransactionResponse) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *GetTransactionResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetTransactionResponse) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetTransactionResponse) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+func (x *GetTransactionResponse) GetCurrency() string {
+	if x != nil {
+		return x.Currency
 	}
 	return ""
 }
@@ -250,24 +386,35 @@ var File_proto_payment_payment_proto protoreflect.FileDescriptor
 const file_proto_payment_payment_proto_rawDesc = "" +
 	"\n" +
 	"\x1bproto/payment/payment.proto\x12\n" +
-	"payment.v1\"U\n" +
-	"\rSignupRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"S\n" +
-	"\x0eSignupResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\"@\n" +
-	"\fLoginRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"K\n" +
-	"\rLoginResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
-	"\faccess_token\x18\x02 \x01(\tR\vaccessToken2\x8c\x01\n" +
-	"\vAuthService\x12?\n" +
-	"\x06Signup\x12\x19.payment.v1.SignupRequest\x1a\x1a.payment.v1.SignupResponse\x12<\n" +
-	"\x05Login\x12\x18.payment.v1.LoginRequest\x1a\x19.payment.v1.LoginResponseB4Z2github.com/kev-2544/go-payment-backend/gen/paymentb\x06proto3"
+	"payment.v1\"I\n" +
+	"\x13CalculateFeeRequest\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"c\n" +
+	"\x14CalculateFeeResponse\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x10\n" +
+	"\x03fee\x18\x02 \x01(\tR\x03fee\x12!\n" +
+	"\ftotal_amount\x18\x03 \x01(\tR\vtotalAmount\"c\n" +
+	"\x14CreateDepositRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\x80\x01\n" +
+	"\x15CreateDepositResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x10\n" +
+	"\x03fee\x18\x04 \x01(\tR\x03fee\">\n" +
+	"\x15GetTransactionRequest\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\"\x9d\x01\n" +
+	"\x16GetTransactionResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x10\n" +
+	"\x03fee\x18\x04 \x01(\tR\x03fee\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency2\x92\x02\n" +
+	"\x0ePaymentService\x12Q\n" +
+	"\fCalculateFee\x12\x1f.payment.v1.CalculateFeeRequest\x1a .payment.v1.CalculateFeeResponse\x12T\n" +
+	"\rCreateDeposit\x12 .payment.v1.CreateDepositRequest\x1a!.payment.v1.CreateDepositResponse\x12W\n" +
+	"\x0eGetTransaction\x12!.payment.v1.GetTransactionRequest\x1a\".payment.v1.GetTransactionResponseB4Z2github.com/kev-2544/go-payment-backend/gen/paymentb\x06proto3"
 
 var (
 	file_proto_payment_payment_proto_rawDescOnce sync.Once
@@ -281,20 +428,24 @@ func file_proto_payment_payment_proto_rawDescGZIP() []byte {
 	return file_proto_payment_payment_proto_rawDescData
 }
 
-var file_proto_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_payment_payment_proto_goTypes = []any{
-	(*SignupRequest)(nil),  // 0: payment.v1.SignupRequest
-	(*SignupResponse)(nil), // 1: payment.v1.SignupResponse
-	(*LoginRequest)(nil),   // 2: payment.v1.LoginRequest
-	(*LoginResponse)(nil),  // 3: payment.v1.LoginResponse
+	(*CalculateFeeRequest)(nil),    // 0: payment.v1.CalculateFeeRequest
+	(*CalculateFeeResponse)(nil),   // 1: payment.v1.CalculateFeeResponse
+	(*CreateDepositRequest)(nil),   // 2: payment.v1.CreateDepositRequest
+	(*CreateDepositResponse)(nil),  // 3: payment.v1.CreateDepositResponse
+	(*GetTransactionRequest)(nil),  // 4: payment.v1.GetTransactionRequest
+	(*GetTransactionResponse)(nil), // 5: payment.v1.GetTransactionResponse
 }
 var file_proto_payment_payment_proto_depIdxs = []int32{
-	0, // 0: payment.v1.AuthService.Signup:input_type -> payment.v1.SignupRequest
-	2, // 1: payment.v1.AuthService.Login:input_type -> payment.v1.LoginRequest
-	1, // 2: payment.v1.AuthService.Signup:output_type -> payment.v1.SignupResponse
-	3, // 3: payment.v1.AuthService.Login:output_type -> payment.v1.LoginResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 0: payment.v1.PaymentService.CalculateFee:input_type -> payment.v1.CalculateFeeRequest
+	2, // 1: payment.v1.PaymentService.CreateDeposit:input_type -> payment.v1.CreateDepositRequest
+	4, // 2: payment.v1.PaymentService.GetTransaction:input_type -> payment.v1.GetTransactionRequest
+	1, // 3: payment.v1.PaymentService.CalculateFee:output_type -> payment.v1.CalculateFeeResponse
+	3, // 4: payment.v1.PaymentService.CreateDeposit:output_type -> payment.v1.CreateDepositResponse
+	5, // 5: payment.v1.PaymentService.GetTransaction:output_type -> payment.v1.GetTransactionResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -311,7 +462,7 @@ func file_proto_payment_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_payment_payment_proto_rawDesc), len(file_proto_payment_payment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

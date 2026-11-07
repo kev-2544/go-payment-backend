@@ -2,7 +2,9 @@ package repository
 
 import (
     "context"
+    "errors"
 
+    "github.com/jackc/pgx/v5"
     "github.com/jackc/pgx/v5/pgxpool"
     "github.com/kev-2544/go-payment-backend/internal/model"
 )
@@ -29,9 +31,10 @@ func (r *postgresPaymentRepository) CreateTransaction(
             amount,
             fee,
             currency,
-            status
+            status,
+            provider_reference
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
     `
 
     _, err := r.db.Exec(
@@ -43,6 +46,7 @@ func (r *postgresPaymentRepository) CreateTransaction(
         tx.Fee,
         tx.Currency,
         tx.Status,
+        tx.ProviderReference,
     )
 
     return err
@@ -56,7 +60,8 @@ func (r *postgresPaymentRepository) GetTransaction(
     tx := &model.Transaction{}
 
     query := `
-        SELECT id, user_id, amount, fee, currency, status
+        SELECT id, user_id, amount, fee, currency, status,
+               COALESCE(provider_reference, '')
         FROM transactions
         WHERE id = $1
     `
@@ -68,8 +73,12 @@ func (r *postgresPaymentRepository) GetTransaction(
         &tx.Fee,
         &tx.Currency,
         &tx.Status,
+        &tx.ProviderReference,
     )
 
+    if errors.Is(err, pgx.ErrNoRows) {
+        return nil, ErrNotFound
+    }
     if err != nil {
         return nil, err
     }
