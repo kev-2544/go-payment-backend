@@ -85,3 +85,21 @@ func (r *postgresPaymentRepository) GetTransaction(
 
     return tx, nil
 }
+
+func (r *postgresPaymentRepository) UpdateProviderReference(
+    ctx context.Context,
+    transactionID string,
+    providerReference string,
+) error {
+
+    _, err := r.db.Exec(
+        ctx,
+        `UPDATE transactions
+         SET provider_reference = $1
+         WHERE id = $2`,
+        providerReference,
+        transactionID,
+    )
+
+    return err
+}

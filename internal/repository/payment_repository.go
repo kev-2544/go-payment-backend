@@ -20,4 +20,10 @@ type PaymentRepository interface {
         ctx context.Context,
         id string,
     ) (*model.Transaction, error)
+
+    UpdateProviderReference(
+    ctx context.Context,
+    transactionID string,
+    providerReference string,
+    ) error
 }
